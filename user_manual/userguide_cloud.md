@@ -4,8 +4,8 @@ Welcome to the user manual of the REDUS Framework. This guide will show you the 
 
 ## 0. Pre-requisites
 
-1. Internet browser
-2. (Optional) Experience in the REDUS Survey Time Series XML Recipe
+1. An internet browser.
+2. (Optional) Experience in the REDUS Survey Time Series XML Recipe [guide](redus_master_recipe.html).
 
 ## 1. Starting up
 
@@ -50,7 +50,7 @@ Each of these survey data can be individually modified using the drop down selec
 1. `As is` : This means that you don't want to modify the pre-defined data that comes with the assessment.
 
 2. `(Official) Pre-computed values` : Choose this to use the *official* result from the nightly StoX survey time series run.
-> **NOTE:** The official results are currently available here: http://astarte.imr.no/ocpu/library/REDUStools/www/imrsts.html . This was generated and serverd using the REDUStools R package available here: https://github.com/REDUS-IMR/REDUStools .
+> **NOTE:** The official results are currently available here: <http://astarte.imr.no/ocpu/library/REDUStools/www/imrsts.html> . This was generated and served using the REDUStools R package available here: <https://github.com/REDUS-IMR/REDUStools>.
 
 3. `Re-process using StoX` : This option will force the survey time series re-processing using StoX/Rstox. For this you will need to fill-in the recipe for the StoX processing. The recipe is an XML document. Below is a sample recipe for the `Barents Sea Northeast Arctic cod bottom trawl index in winter` survey time series:
 
@@ -92,7 +92,7 @@ Each of these survey data can be individually modified using the drop down selec
   </parameters>
 </redus_master>
 ```
-> **NOTE:** The documentation for the recipe will follow soon...
+> **NOTE:** The documentation for the recipe is [here](redus_master_recipe.html).
 
 ![reprocess survey using StoX](./images/conf-survey2.png)
 
@@ -104,7 +104,7 @@ To select the available assessment program, click on the `Assessment` from the l
 
 ![select assessment](./images/conf-assessment.png)
 
-> **NOTE:** Latest SAM and XSAM is using the master branch of the https://github.com/fishfollower/SAM repository, the only difference is XSAM will try to use the covariance matrices from the StoX output
+> **NOTE:** Latest SAM and XSAM is using the master branch of the <https://github.com/fishfollower/SAM> repository, the only difference is XSAM will try to use the covariance matrices from the StoX output
 
 ### C. Finish configuring
 
