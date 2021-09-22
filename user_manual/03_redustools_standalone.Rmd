@@ -60,7 +60,7 @@ the environment is necessary, otherwise by default `REDUStools` will
 try to use the `/data/REDUS` directory which might not available
 in your running platform.
 
-```{r setup, echo = TRUE, results = 'hide'}
+```{r setup, echo = TRUE, results = 'hide', message=FALSE, warning=FALSE}
 install.packages("remotes")
 remotes::install_github("SEA2DATA/Rstox", ref="develop")
 remotes::install_github("REDUS-IMR/REDUStools")
@@ -75,7 +75,7 @@ Sys.setenv(R_CONFIG_ACTIVE = "docker")
 Now we process the survey time series. Wait for a while as it can take
 some time to finish. In the end we will print out the processing status.
 
-```{r chunk-label1, echo = TRUE, fig.cap = 'Do processing.'}
+```{r chunk-label1, echo = TRUE, eval = FALSE, fig.cap = 'Do processing.'}
 # Run process!
 status <- REDUStools::processRstoxSTS("assets/barents_sea_capelin_acoustic_autumn.xml")
 print(status)
@@ -108,8 +108,6 @@ print(stsdata$data2)
 You can generate a nice static page with graphs and tables
 (also in PDF and CSV formats) by running this piece of code below.
 
-You will get something like this [output](./out/Barents Sea capelin acoustic abundance estimate in autumn/output/index.html).
-
 ```{r chunk-label3, eval = FALSE, fig.cap = 'Make output.'}
 
 # Now make a nice multi-format output:
@@ -119,23 +117,17 @@ REDUStools:::createStaticOutput("Barents Sea capelin acoustic abundance estimate
 # ./out/Barents Sea capelin acoustic abundance estimate in autumn/output/index.html
 ```
 
-```{r echo=FALSE, results='asis'}
+Below is an example of the output. The full output contains many other output formats.
+
+---
+
+```{r echo=FALSE, results='asis', warning=FALSE}
 # Manually run the REDUStools:::createStaticOutput function
 sts <- "Barents Sea capelin acoustic abundance estimate in autumn"
 stsName <- sts
-outDir <- "./out"
 appendTimeStamp <- NA
 Sys.setenv(R_CONFIG_ACTIVE = "docker")
 results <- REDUStools::loadSTS(sts)
-stsOut <- paste0(outDir, "/", sts, "/output")
-dir.create(stsOut, recursive = TRUE, showWarnings = FALSE)
-outChart <- REDUStools:::genPNGplot(results, sts, stsOut, appendTimeStamp)
-outTable <- REDUStools:::genTables(results, sts, stsOut, appendTimeStamp)
-if (length(outTable) == 0) 
-    return(NULL)
-TS <- ""
-if (!is.na(appendTimeStamp)) 
-    TS <- paste0(".", appendTimeStamp)
 tempFP <- format(results$fp)
 stsFP <- data.table::data.table(param = names(tempFP), value = tempFP)
 res <- knitr::knit_child("assets/stshtml.Rmd", quiet = TRUE)
