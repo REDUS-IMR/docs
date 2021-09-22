@@ -127,7 +127,7 @@ remotes::install_github("SEA2DATA/Rstox", ref="develop")
 output <- REDUStools::processRstoxSTS("barents_sea_neacod_trawl_winter.xml")
 ```
 
-Please see another guide that will explain more on the above stand-alone process (TODO).
+Please see another guide that will explain more on the above stand-alone proces [here](#redustools-standalone).
 
 ## Parameter details
 
