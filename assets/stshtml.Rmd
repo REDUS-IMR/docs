@@ -1,0 +1,23 @@
+## Abundance
+
+```{r fig-abundance, warning=FALSE, echo=FALSE}
+REDUStools:::stsPlot(results, "Abundance")
+```
+
+```{r table-abundance, results='asis', warning=FALSE, echo=FALSE}
+memisc::show_html(outTable$Ab, digits=2, output="stdout")
+```
+
+## Weight
+```{r fig-weight, warning=FALSE, echo=FALSE}
+REDUStools:::stsPlot(results, "Weight")
+```
+
+```{r table-weight, results='asis', warning=FALSE, echo=FALSE}
+memisc::show_html(outTable$Wt, digits=2, output="stdout")
+```
+
+### Metadata
+```{r table-fp, results='asis', warning=FALSE, echo=FALSE}
+memisc::show_html(stsFP, digits=2, output="stdout")
+```

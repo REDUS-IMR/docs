@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<redus_master xmlns="http://www.imr.no/formats/redus/master/v0.1" revision="1" version="0.1">
+  <configuration>
+    <useLatestRstox>true</useLatestRstox>
+    <saveOutputTable>true</saveOutputTable>
+    <saveOutputStatics>true</saveOutputStatics>
+    <saveRunStatus>true</saveRunStatus>
+    <generateAssessmentFiles>true</generateAssessmentFiles>
+  </configuration>
+  <globalParameter>
+    <!-- <fileFix from="biotic_cruiseNumber_1994001_Anny+KrÃ¦mer.xml" to="biotic_cruiseNumber_1994001_Anny+Kræmer.xml"/> -->
+  </globalParameter>
+  <parameters sts="Barents Sea capelin acoustic abundance estimate in autumn" revision="1" version="0.1">
+    <configuration>
+      <stsName>Barents Sea capelin acoustic abundance estimate in autumn</stsName>
+      <overwriteNMD>false</overwriteNMD>
+      <forceReProcess>true</forceReProcess>
+      <forceBioticV3>true</forceBioticV3>
+      <skipYear></skipYear>
+      <startYear>2018</startYear>
+      <endYear>2019</endYear>
+      <levelRequested>bootstrapImpute</levelRequested>
+      <bootstrapSeed>77</bootstrapSeed>
+      <bootstrapImputeSeed>101</bootstrapImputeSeed>
+      <bootstrapIter>5</bootstrapIter>
+      <coresUse>1</coresUse>
+      <groupType>age</groupType>
+      <minAge>1</minAge>
+      <maxAge>12</maxAge>
+      <plusAge>7</plusAge>
+      <numberScale>1000000</numberScale>
+      <dataType>survey</dataType>
+      <applyOverrides>false</applyOverrides>
+    </configuration>
+    <override>
+      <!-- <parameter name="UseProcessData">true</parameter> -->
+    </override>
+  </parameters>
+</redus_master>
+

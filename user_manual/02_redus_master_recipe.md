@@ -1,4 +1,4 @@
-# REDUS Master Recipe
+# REDUS Master Recipe {#redus-master-recipe}
 
 REDUS framework uses a special kind of recipe to process the IMR Survey Time Series from NMD's Dataset Explorer. This recipe is formulated in an XML format and contains many user configurable options. 
 

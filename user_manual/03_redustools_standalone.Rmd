@@ -1,0 +1,143 @@
+# REDUSTOOLS Standalone Example {#redustools-standalone}
+
+This guide shows you a step-by-step guide on how to run a standalone
+REDUStools with an XML recipe to process a survey time series.
+
+## Preparing the master recipe
+For this example we will use an the 
+**Barents Sea capelin acoustic abundance estimate in autumn**
+survey time series. Below is an example recipe and we save the xml
+into `assets/barents_sea_capelin_acoustic_autumn.xml` file.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<redus_master xmlns="http://www.imr.no/formats/redus/master/v0.1" revision="1" version="0.1">
+  <configuration>
+    <useLatestRstox>true</useLatestRstox>
+    <saveOutputTable>true</saveOutputTable>
+    <saveOutputStatics>true</saveOutputStatics>
+    <saveRunStatus>true</saveRunStatus>
+    <generateAssessmentFiles>true</generateAssessmentFiles>
+  </configuration>
+  <globalParameter>
+    <!-- <fileFix from="biotic_cruiseNumber_1994001_Anny+KrÃ¦mer.xml" to="biotic_cruiseNumber_1994001_Anny+Kræmer.xml"/> -->
+  </globalParameter>
+  <parameters sts="Barents Sea capelin acoustic abundance estimate in autumn" revision="1" version="0.1">
+    <configuration>
+      <stsName>Barents Sea capelin acoustic abundance estimate in autumn</stsName>
+      <overwriteNMD>false</overwriteNMD>
+      <forceReProcess>true</forceReProcess>
+      <forceBioticV3>true</forceBioticV3>
+      <skipYear></skipYear>
+      <startYear>2018</startYear>
+      <endYear>2019</endYear>
+      <levelRequested>bootstrapImpute</levelRequested>
+      <bootstrapSeed>77</bootstrapSeed>
+      <bootstrapImputeSeed>101</bootstrapImputeSeed>
+      <bootstrapIter>5</bootstrapIter>
+      <coresUse>1</coresUse>
+      <groupType>age</groupType>
+      <minAge>1</minAge>
+      <maxAge>12</maxAge>
+      <plusAge>7</plusAge>
+      <numberScale>1000000</numberScale>
+      <dataType>survey</dataType>
+      <applyOverrides>false</applyOverrides>
+    </configuration>
+    <override>
+      <!-- <parameter name="UseProcessData">true</parameter> -->
+    </override>
+  </parameters>
+</redus_master>
+```
+
+## Running the process
+
+### Setup
+
+First, we setup and install the necessary packages. Setting up
+the environment is necessary, otherwise by default `REDUStools` will
+try to use the `/data/REDUS` directory which might not available
+in your running platform.
+
+```{r setup, echo = TRUE, results = 'hide'}
+install.packages("remotes")
+remotes::install_github("SEA2DATA/Rstox", ref="develop")
+remotes::install_github("REDUS-IMR/REDUStools")
+# Without the below command, the result data will be put in /data/REDUS directory
+# or  REDUStools:::getConfig()$root.dir
+# Setting it to "docker" means we will use the current active directory
+Sys.setenv(R_CONFIG_ACTIVE = "docker")
+```
+
+### Process
+
+Now we process the survey time series. Wait for a while as it can take
+some time to finish. In the end we will print out the processing status.
+
+```{r chunk-label1, echo = TRUE, fig.cap = 'Do processing.'}
+# Run process!
+status <- REDUStools::processRstoxSTS("assets/barents_sea_capelin_acoustic_autumn.xml")
+print(status)
+```
+
+### Examine data
+
+After the above is finised, let's load the data to examine it.
+
+```{r chunk-label2, echo = TRUE, fig.cap = 'Loading processed data.'}
+# Get the data
+stsdata <-  REDUStools::loadSTS("Barents Sea capelin acoustic abundance estimate in autumn")
+
+# Get the metadata
+print(stsdata$meta)
+
+print(stsdata$fp)
+
+# Get the data
+print(stsdata$data)
+
+# Get the data (lengthgroup-based)
+print(stsdata$data2)
+
+# Note that ".id" column means the bootstrap id number (see in the .xml file for the number of bootstrap done)
+```
+
+### (Optional) Making a nice single page visualization
+
+You can generate a nice static page with graphs and tables
+(also in PDF and CSV formats) by running this piece of code below.
+
+You will get something like this [output](./out/Barents Sea capelin acoustic abundance estimate in autumn/output/index.html).
+
+```{r chunk-label3, eval = FALSE, fig.cap = 'Make output.'}
+
+# Now make a nice multi-format output:
+REDUStools:::createStaticOutput("Barents Sea capelin acoustic abundance estimate in autumn", "./out")
+
+# Point your browser to:
+# ./out/Barents Sea capelin acoustic abundance estimate in autumn/output/index.html
+```
+
+```{r echo=FALSE, results='asis'}
+# Manually run the REDUStools:::createStaticOutput function
+sts <- "Barents Sea capelin acoustic abundance estimate in autumn"
+stsName <- sts
+outDir <- "./out"
+appendTimeStamp <- NA
+Sys.setenv(R_CONFIG_ACTIVE = "docker")
+results <- REDUStools::loadSTS(sts)
+stsOut <- paste0(outDir, "/", sts, "/output")
+dir.create(stsOut, recursive = TRUE, showWarnings = FALSE)
+outChart <- REDUStools:::genPNGplot(results, sts, stsOut, appendTimeStamp)
+outTable <- REDUStools:::genTables(results, sts, stsOut, appendTimeStamp)
+if (length(outTable) == 0) 
+    return(NULL)
+TS <- ""
+if (!is.na(appendTimeStamp)) 
+    TS <- paste0(".", appendTimeStamp)
+tempFP <- format(results$fp)
+stsFP <- data.table::data.table(param = names(tempFP), value = tempFP)
+res <- knitr::knit_child("assets/stshtml.Rmd", quiet = TRUE)
+cat(res, sep = '\n')
+```

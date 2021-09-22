@@ -2,12 +2,12 @@
 
 Welcome to the user manual of the REDUS Framework. This guide will show you the step-by-step guide for running the assessment workflow using the REDUS Framework cloud application.
 
-## 0. Pre-requisites
+## Pre-requisites
 
 1. An internet browser.
-2. (Optional) Experience in the REDUS Survey Time Series XML Recipe [guide](redus_master_recipe.html).
+2. (Optional) Experience in the REDUS Survey Time Series XML Recipe [guide](#redus-master-recipe).
 
-## 1. Starting up
+## Starting up
 
 Point your browser to the URL of the REDUS framework:
 
@@ -20,7 +20,7 @@ http://myrto.hi.no:3000
 You'll be greeted with the assessment selection page as below:
 ![welcome page](./images/welcome.png)
 
-## 2. Selecting an assessment
+## Selecting an assessment
 
 You may select the available assessment from the drop-down list.
 
@@ -30,7 +30,7 @@ After selecting an assessment, click on `Run assessment now` button if you want 
 
 > **TIPS:** You can run multiple assessments in parallel if you wish to do that. Simply open a new browser tab and select another assessment to run.
 
-## 3. Configuring an assessment
+## Configuring an assessment
 
 As of now, the supported configuration of an assesment are:
 
@@ -39,7 +39,7 @@ As of now, the supported configuration of an assesment are:
 
 > **NOTE:** Support for *catch* and *acoustic* data is not yet supported.
 
-### A. Configure the survey data
+### Configure the survey data
 
 To configure the survey data input, click on the `Input data` on the left hand side menu and select `Survey data` on the tab menu. You will be presented by the list of survey data (by fleets) that is included in the assessment.
 
@@ -92,13 +92,13 @@ Each of these survey data can be individually modified using the drop down selec
   </parameters>
 </redus_master>
 ```
-> **NOTE:** The documentation for the recipe is [here](redus_master_recipe.html).
+> **NOTE:** The documentation for the recipe is [here](#redus-master-recipe).
 
 ![reprocess survey using StoX](./images/conf-survey2.png)
 
 4. `Input manual values` : Here you can input manual values in the text format for the specified survey data.
 
-### B. Configure the assessment program
+### Configure the assessment program
 
 To select the available assessment program, click on the `Assessment` from the left hand side menu. You'll be presented by the information of the current assessment used in the model and a drop down selection of `Latest SAM` and `Latest XSAM` option.
 
@@ -106,11 +106,11 @@ To select the available assessment program, click on the `Assessment` from the l
 
 > **NOTE:** Latest SAM and XSAM is using the master branch of the <https://github.com/fishfollower/SAM> repository, the only difference is XSAM will try to use the covariance matrices from the StoX output
 
-### C. Finish configuring
+### Finish configuring
 
 If you are finished with configuring, please click the `Run assessment now` button to run the assessment workflow using your defined configuration.
 
-## 4. Running the assessment
+## Running the assessment
 
 After clicking the `Run assessment now` button, there will be a popup that shows the status of the provisioning process before the assessment is run:
 

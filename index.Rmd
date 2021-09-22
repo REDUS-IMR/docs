@@ -1,0 +1,12 @@
+--- 
+title: "REDUS Framework Manuals"
+author: "Ibrahim Umar"
+date: "`r Sys.Date()`"
+output:
+  bookdown::gitbook: default
+documentclass: book
+---
+
+# Preface {-}
+
+This book will explain about the REDUS Framework.
