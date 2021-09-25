@@ -20,8 +20,11 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Install GDAL
-        run: sudo apt-get install gdal-bin libgdal-dev
+      - name: Ensure rJava is working
+        run: sudo R CMD javareconf
+
+      - name: Install GDAL and Libgit2
+        run: sudo apt-get install gdal-bin libgdal-dev libgit2-dev
 
       - name: Install bookdown
         run: Rscript -e 'install.packages("bookdown")'
