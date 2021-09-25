@@ -1,4 +1,4 @@
-# REDUS Framework (Cloud) User Manual
+# REDUS Framework (Cloud) User Manual {#RF-cloud-guide}
 
 Welcome to the user manual of the REDUS Framework. This guide will show you the step-by-step guide for running the assessment workflow using the REDUS Framework cloud application.
 

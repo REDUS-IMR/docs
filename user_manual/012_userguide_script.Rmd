@@ -1,0 +1,338 @@
+# REDUS Framework (R Script) User Manual {#RF-script-guide}
+
+This manual will guide you to prepare an assessment to be run in the REDUS
+framework by using only R scripting methods.
+
+## Pre-requisites
+
+To be able to follow this guide, you must have these components ready on your system:
+
+1. A working Docker installation (<https://www.docker.com/get-started>).
+2. An R application.
+3. R package `yaml`, `git2r`, `jsonlite` and `bibtex` installed.
+   ```{r, echo = TRUE, results='hide'}
+   install.packages(c("yaml", "git2r", "jsonlite","bib2df"))
+   ```
+
+## Getting the REDUS Framework container template
+
+First, we need to download the REDUS Framework container template from Github.
+This template provides the skeleton that will automate the assessment processing.
+The template is available at <https://github.com/REDUS-IMR/docker-redus-pipeline>.
+
+```{r, echo = TRUE}
+# (Optional) Set a working directory
+setwd(tempdir())
+
+# Clone the template
+git2r::clone("https://github.com/REDUS-IMR/docker-redus-pipeline.git", "redus-framework")
+
+# Go into redus-framework/projects as we will mostly work from this directory
+setwd("redus-framework/projects")
+```
+
+## Prepare an ID
+
+Before preparing the assessment files, 
+you must write a unique ID for the framework run in a file named `id.conf`
+in the `redus-framework/projects` directory.
+This ID is necessary for the several web services in the container to run.
+
+```{r, echo = TRUE}
+ID <- "0000"
+
+fileConn <- file("id.conf")
+writeLines(ID, fileConn)
+close(fileConn)
+```
+
+## Get the assessment bundle (code and data)
+
+REDUS Framework works best with any
+[ICES TAF](https://www.ices.dk/data/assessment-tools/Pages/transparent-assessment-framework.aspx)
+-based assessment bundles. However, any assessment bundles from stockassessment.org will work
+too with some slight modifications.
+
+REDUS Framework Github repository provides two example assessments for users to tryout:
+
+1. North East Artic Cod in 2018 (TAF based) [[link](https://github.com/REDUS-IMR/redus-framework/raw/master/extra/neacod-2018.tgz)]
+2. Norwegian Sea Herring in 2019 (Stockassessment.org based) [[link](https://github.com/REDUS-IMR/redus-framework/raw/master/extra/nsher-2019.tgz)]
+
+Read more about converting your own assessment into REDUS Framework in this guide (TODO).
+
+For this example let's use the NEA Cod 2018 Assessment.
+
+```{r, echo = TRUE}
+# Download from Github
+download.file("https://github.com/REDUS-IMR/redus-framework/raw/master/extra/neacod-2018.tgz", "neacod-2018.tgz")
+
+# See the content of the file
+untar("neacod-2018.tgz", list = TRUE)
+
+# Unpack it
+untar("neacod-2018.tgz")
+
+# Remove the compressed file as we don't need it anymore
+unlink("neacod-2018.tgz")
+```
+
+> NOTE: It's possible to have more than one assessment bundle. Just extract the another 
+more assesssment bundles in the current `redus-framework/projects` directory.
+
+## Configure the assessment
+
+### Processing directives
+
+All REDUS Framework configuration is stored in a configuration file `redus.yaml`.
+This file should be placed in the `redus/` directory of the assessment bundle.
+The configuration should start with these 3 lines:
+
+```yaml
+default:
+  redustools.remote: "http://astarte.imr.no/ocpu/library/REDUStools/"
+  survey: "bootstrap/initial/data/survey.dat"
+```
+
+The `redustools.remote` tells the framework the location of the REDUS Framework API
+Server endpoint. And `survey` tells the framework the survey data file that is used
+in the assessment. Let's build this using R:
+
+```{r, echo=TRUE}
+# Create the default configuration
+configuration <- list(default = list(
+                        redustools.remote="http://astarte.imr.no/ocpu/library/REDUStools/",
+                        survey = "bootstrap/initial/data/survey.dat"))
+# Check the output
+cat(yaml::as.yaml(configuration))
+```
+
+#### Survey data
+
+To apply processing step to any survey indexes, we must examine the content
+of the survey file (e.g., `bootstrap/initial/data/survey.dat` and 
+note down the fleet names (e.g., `NorBarTrSur`, `NorBarLofAcSur`, etc.).
+
+The processing mode can be either:
+
+1. `asis`: This means that you don’t want to modify the pre-defined data that comes with the assessment.
+
+2. `remote`: Choose this to use the *official* result from the nightly StoX survey time series run.
+> **NOTE:** The official results are currently available here: <http://astarte.imr.no/ocpu/library/REDUStools/www/imrsts.html> . This was generated and served using the REDUStools R package available here: <https://github.com/REDUS-IMR/REDUStools>.
+
+3. `build`: This option will force the survey time series re-processing using StoX/Rstox. For this you will need to fill-in the recipe for the StoX processing. The recipe is an XML document as. See [here](#redus-master-recipe) for more detailed information. Later you will need to save the recipe as an XML file (e.g., `NorBarTrSur.xml`). See below for an example.
+
+4. `manual`: Here you can input manual values in the text format for the specified survey data.
+
+Below are some examples to apply an extra processing to the `NorBarTrSur` survey index data.
+
+**a. Re-Build the index using StoX (build mode)**
+
+We want to use StoX to re-process the **"Barents Sea Northeast Arctic cod bottom trawl index in winter"**
+survey time series from NMD, using the Recipe XML file available from here: <https://git.imr.no/snippets/8>.
+
+```{r, echo=TRUE}
+
+# Create redus configuration directory
+dir.create("neacod-2018/redus")
+
+# Prepare XML recipe
+download.file("https://git.imr.no/-/snippets/8/raw/master/snippetfile1.txt?inline=false",
+    "neacod-2018/redus/NorBarTrSur.xml")
+
+# Prepare configuration (YAML)
+
+## Important prefix
+prefix <- "survey.update."
+
+## The id of the survey configuration, (1 for the 1st, 2 for the 2nd, etc...)
+iter <- 1
+
+## The name of the target survey index
+survey <- "NorBarTrSur"
+
+## Process type (can be either 'asis', 'remote', 'build' or 'manual')
+configuration[["default"]][[paste0(prefix, iter, '.mode')]] <- "build"
+
+## REDUS Master recipe if mode is set to "build"
+configuration[["default"]][[paste0(prefix, iter, '.surveyBuildConf')]] <- "./redus/NorBarTrSur.xml"
+### Try to use Age information from the pre-defined data
+configuration[["default"]][[paste0(prefix, iter, '.useSourceAge')]] <- "true"
+### Try to use Year information from the pre-defined data
+configuration[["default"]][[paste0(prefix, iter, '.useSourceYear')]] <- "true"
+
+## Name of the header target in survey.dat file
+configuration[["default"]][[paste0(prefix, iter, '.header')]] <- survey
+
+## Leave these two below as empty, these are the manual data input 
+## in text mode (each for index and covar)
+configuration[["default"]][[paste0(prefix, iter, '.data')]] <- ""
+configuration[["default"]][[paste0(prefix, iter, '.data_var')]] <- ""
+
+## We can leave below as empty as this is needed only for "remote" mode
+configuration[["default"]][[paste0(prefix, iter, '.stssource')]] <- ""
+configuration[["default"]][[paste0(prefix, iter, '.stsdate')]] <- ""
+```
+
+**b. Replace an index using the official result (remote mode)**
+
+```{r, echo = TRUE}
+## The id of the survey configuration (2 = second)
+iter <- 2
+
+## The name of the target survey index
+survey <- "NorBarLofAcSur"
+
+## Process type (can be either 'asis', 'remote', 'build' or 'manual')
+configuration[["default"]][[paste0(prefix, iter, '.mode')]] <- "remote"
+
+## These are the necessary directive for the "remote" mode
+
+### Survey time series name (from Dataset Explorer)
+configuration[["default"]][[paste0(prefix, iter, '.stssource')]] <- "Barents Sea Northeast Arctic cod bottom trawl index in winter"
+### Set a snapshot date if necessary
+configuration[["default"]][[paste0(prefix, iter, '.stsdate')]] <- ""
+### Try to use Age information from the pre-defined data
+configuration[["default"]][[paste0(prefix, iter, '.useSourceAge')]] <- "true"
+### Try to use Year information from the pre-defined data
+configuration[["default"]][[paste0(prefix, iter, '.useSourceYear')]] <- "false"
+
+## Name of the header target in survey.dat file
+configuration[["default"]][[paste0(prefix, iter, '.header')]] <- survey
+
+## Below is not used in the 'remote' mode
+configuration[["default"]][[paste0(prefix, iter, '.surveyBuildConf')]] <- ""
+
+## Leave these two below as empty, these are the manual data input 
+## in text mode (each for index and covar)
+configuration[["default"]][[paste0(prefix, iter, '.data')]] <- ""
+configuration[["default"]][[paste0(prefix, iter, '.data_var')]] <- ""
+```
+
+**Write the configuration**
+
+You must write the configuration back to the assessment bundle.
+
+```{r, echo=TRUE}
+## Write configuration to the root of the assessment directory
+yaml::write_yaml(configuration, "neacod-2018/redus/redus.yaml")
+```
+
+#### Assessment program
+
+To change the assessment program, you need to open the `bootstrap/SOFTWARE.bib`
+file and change the `source` value in the `stockassessment` item:
+
+```{r, echo=TRUE, warning=FALSE}
+# Read Software BIB
+df <- bib2df::bib2df("neacod-2018/bootstrap/SOFTWARE.bib")
+
+# Peek the pre-defined program
+print(df[1, "SOURCE"])
+
+# Change assessment program to the latest SAM
+df[1, "SOURCE"] <-  "fishfollower/SAM/stockassessment@master"
+
+# Write back the change
+bib2df::df2bib(df, "neacod-2018/bootstrap/SOFTWARE.bib")
+```
+
+In addition to the above, if you are either using SAM or XSAM, it is necessary
+to write `use.SAM` or `use.XSAM` in the REDUS configuration directory:
+
+```{r, echo=TRUE}
+# Notify that we will use XSAM
+fileConn <- file("neacod-2018/redus/use.XSAM")
+
+# or SAM
+#fileConn <- file("neacod-2018/redus/use.SAM")
+
+writeLines("", fileConn)
+close(fileConn)
+```
+
+## Build and run the REDUS Framework container
+
+These are the final step needed to run the assessment.
+After all the files are ready we can proceed with building
+the Docker image and run the framework as a Docker container.
+
+```{r, echo = TRUE, eval = FALSE}
+# Get back to 'redus-framework' directory
+setwd("..")
+
+# Select a name for the run 
+runname <- "testit"
+
+# Select port for the web services 
+port <- 8000
+
+# Build the image
+Sys.setenv(RUN = runname, PORT = port)
+
+system("docker build --pull --rm -t ${RUN} .")
+
+# Run the image
+system("docker run -p ${PORT}:8888 --name ${RUN} -dit ${RUN}")
+```
+
+## Examine the run
+
+As with the cloud version of the REDUS Framework, the run
+from the script provides the various Web-based tools, namely:
+1. File explorer
+2. Terminal
+3. Logs
+4. Results page
+
+You can instruct R to open the above URLs using your web browser:
+
+```{r, echo = TRUE, eval = FALSE}
+# Let's open the File Explorer
+browseURL(paste0("http://localhost:", port, "/id/", ID, "/p/workspace/"))
+
+# Let's open the Terminal
+browseURL(paste0("http://localhost:", port, "/id/", ID, "/p/terminal"))
+
+# Let's open the Logs
+browseURL(paste0("http://localhost:", port, "/id/", ID, "/p/logs"))
+
+# Let's open the Results page (only available when run is finish with success)
+browseURL(paste0("http://localhost:", port, "/id/", ID, "/p/report"))
+```
+
+## Stopping the run
+
+Remember to stop the Docker container after you finished to ensure all the
+memory and disk space used are released:
+
+```{r, echo = TRUE, eval = FALSE}
+# Kill the run
+system("docker kill ${RUN}")
+
+# Cleaning up
+system("docker rm ${RUN}")
+```
+
+## (Advanced) Parsing the status of the run
+
+For the brave soul who likes to tinker more with the program, you can utilize
+the status information to programmatically get the results and/or cleaning 
+up the run.
+
+You can use a more advanced scheduler such as `taskscheduleR` package to automate
+everything.
+
+```{r, echo = TRUE, eval = FALSE}
+# Try to print the status
+status <- jsonlite::fromJSON(paste0("http://localhost:", port, "/id/", ID, "/p/status"))
+print(status)
+
+# Show me the results ONLY when the run has successfully finished
+status <- jsonlite::fromJSON(paste0("http://localhost:", port, "/id/", ID, "/p/status"))
+
+# All statuses are 0 means that the pre-processing and the assessment runs
+# have been finished without errors.
+if(sum(status$redus) + sum(status$assessement) == 0) {
+    browseURL(paste0("http://localhost:", port, "/id/", ID, "/p/report"))
+}
+```

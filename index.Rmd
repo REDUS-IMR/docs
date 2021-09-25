@@ -1,5 +1,5 @@
 --- 
-title: "REDUS Framework Manuals"
+title: "REDUS Framework User Manuals"
 author: "Ibrahim Umar"
 date: "`r Sys.Date()`"
 output:
@@ -9,4 +9,30 @@ documentclass: book
 
 # Preface {-}
 
-This book will explain about the REDUS Framework.
+This book will explain about the REDUS Framework and its supporting tools.
+
+Here are the overview of the book
+
+## User Guides
+
+### REDUS Framework
+
+1. [REDUS Framework (Cloud) User Guides](#RF-cloud-guide)
+2. [REDUS Framework (R script) User Guides](#RF-script-guide)
+
+### Supporting formats and tools
+
+3. [The REDUS master recipe format for automated survey time series processing](#redus-master-recipe)
+4. [Using the `REDUStools` R package and the master recipe to process one or more survey time series](#redustools-standalone)
+
+## Developer Guides
+
+### REDUS Framework backend
+
+1. Setting up REDUS Framework API Server
+2. Setting up REDUS Framework Cloud Server
+3. Adding new assessment
+
+### Other useful tools
+
+1. Survey Time Series Downloader

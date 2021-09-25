@@ -1,5 +1,6 @@
 rmd_files:
 - index.Rmd
 - user_manual/01_userguide_cloud.md
+- user_manual/012_userguide_script.Rmd
 - user_manual/02_redus_master_recipe.md
 - user_manual/03_redustools_standalone.Rmd
