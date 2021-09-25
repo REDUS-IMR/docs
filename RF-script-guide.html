@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 REDUS Framework (R Script) User Manual | REDUS Framework User Manuals</title>
+  <meta name="description" content="2 REDUS Framework (R Script) User Manual | REDUS Framework User Manuals" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 REDUS Framework (R Script) User Manual | REDUS Framework User Manuals" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 REDUS Framework (R Script) User Manual | REDUS Framework User Manuals" />
+  
+  
+  
+
+<meta name="author" content="Ibrahim Umar" />
+
+
+<meta name="date" content="2021-09-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="RF-cloud-guide.html"/>
+<link rel="next" href="redus-master-recipe.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#user-guides"><i class="fa fa-check"></i><b>0.1</b> User Guides</a><ul>
+<li class="chapter" data-level="0.1.1" data-path="index.html"><a href="index.html#redus-framework"><i class="fa fa-check"></i><b>0.1.1</b> REDUS Framework</a></li>
+<li class="chapter" data-level="0.1.2" data-path="index.html"><a href="index.html#supporting-formats-and-tools"><i class="fa fa-check"></i><b>0.1.2</b> Supporting formats and tools</a></li>
+</ul></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#developer-guides"><i class="fa fa-check"></i><b>0.2</b> Developer Guides</a><ul>
+<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#redus-framework-backend"><i class="fa fa-check"></i><b>0.2.1</b> REDUS Framework backend</a></li>
+<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#other-useful-tools"><i class="fa fa-check"></i><b>0.2.2</b> Other useful tools</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="RF-cloud-guide.html"><a href="RF-cloud-guide.html"><i class="fa fa-check"></i><b>1</b> REDUS Framework (Cloud) User Manual</a><ul>
+<li class="chapter" data-level="1.1" data-path="RF-cloud-guide.html"><a href="RF-cloud-guide.html#pre-requisites"><i class="fa fa-check"></i><b>1.1</b> Pre-requisites</a></li>
+<li class="chapter" data-level="1.2" data-path="RF-cloud-guide.html"><a href="RF-cloud-guide.html#starting-up"><i class="fa fa-check"></i><b>1.2</b> Starting up</a></li>
+<li class="chapter" data-level="1.3" data-path="RF-cloud-guide.html"><a href="RF-cloud-guide.html#selecting-an-assessment"><i class="fa fa-check"></i><b>1.3</b> Selecting an assessment</a></li>
+<li class="chapter" data-level="1.4" data-path="RF-cloud-guide.html"><a href="RF-cloud-guide.html#configuring-an-assessment"><i class="fa fa-check"></i><b>1.4</b> Configuring an assessment</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="RF-cloud-guide.html"><a href="RF-cloud-guide.html#configure-the-survey-data"><i class="fa fa-check"></i><b>1.4.1</b> Configure the survey data</a></li>
+<li class="chapter" data-level="1.4.2" data-path="RF-cloud-guide.html"><a href="RF-cloud-guide.html#configure-the-assessment-program"><i class="fa fa-check"></i><b>1.4.2</b> Configure the assessment program</a></li>
+<li class="chapter" data-level="1.4.3" data-path="RF-cloud-guide.html"><a href="RF-cloud-guide.html#finish-configuring"><i class="fa fa-check"></i><b>1.4.3</b> Finish configuring</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="RF-cloud-guide.html"><a href="RF-cloud-guide.html#running-the-assessment"><i class="fa fa-check"></i><b>1.5</b> Running the assessment</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="RF-script-guide.html"><a href="RF-script-guide.html"><i class="fa fa-check"></i><b>2</b> REDUS Framework (R Script) User Manual</a><ul>
+<li class="chapter" data-level="2.1" data-path="RF-script-guide.html"><a href="RF-script-guide.html#pre-requisites-1"><i class="fa fa-check"></i><b>2.1</b> Pre-requisites</a></li>
+<li class="chapter" data-level="2.2" data-path="RF-script-guide.html"><a href="RF-script-guide.html#getting-the-redus-framework-container-template"><i class="fa fa-check"></i><b>2.2</b> Getting the REDUS Framework container template</a></li>
+<li class="chapter" data-level="2.3" data-path="RF-script-guide.html"><a href="RF-script-guide.html#prepare-an-id"><i class="fa fa-check"></i><b>2.3</b> Prepare an ID</a></li>
+<li class="chapter" data-level="2.4" data-path="RF-script-guide.html"><a href="RF-script-guide.html#get-the-assessment-bundle-code-and-data"><i class="fa fa-check"></i><b>2.4</b> Get the assessment bundle (code and data)</a></li>
+<li class="chapter" data-level="2.5" data-path="RF-script-guide.html"><a href="RF-script-guide.html#configure-the-assessment"><i class="fa fa-check"></i><b>2.5</b> Configure the assessment</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="RF-script-guide.html"><a href="RF-script-guide.html#processing-directives"><i class="fa fa-check"></i><b>2.5.1</b> Processing directives</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="RF-script-guide.html"><a href="RF-script-guide.html#build-and-run-the-redus-framework-container"><i class="fa fa-check"></i><b>2.6</b> Build and run the REDUS Framework container</a></li>
+<li class="chapter" data-level="2.7" data-path="RF-script-guide.html"><a href="RF-script-guide.html#examine-the-run"><i class="fa fa-check"></i><b>2.7</b> Examine the run</a></li>
+<li class="chapter" data-level="2.8" data-path="RF-script-guide.html"><a href="RF-script-guide.html#stopping-the-run"><i class="fa fa-check"></i><b>2.8</b> Stopping the run</a></li>
+<li class="chapter" data-level="2.9" data-path="RF-script-guide.html"><a href="RF-script-guide.html#advanced-parsing-the-status-of-the-run"><i class="fa fa-check"></i><b>2.9</b> (Advanced) Parsing the status of the run</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="redus-master-recipe.html"><a href="redus-master-recipe.html"><i class="fa fa-check"></i><b>3</b> REDUS Master Recipe</a><ul>
+<li class="chapter" data-level="3.1" data-path="redus-master-recipe.html"><a href="redus-master-recipe.html#examples"><i class="fa fa-check"></i><b>3.1</b> Examples</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="redus-master-recipe.html"><a href="redus-master-recipe.html#single-survey-time-series"><i class="fa fa-check"></i><b>3.1.1</b> 1. Single Survey Time series</a></li>
+<li class="chapter" data-level="3.1.2" data-path="redus-master-recipe.html"><a href="redus-master-recipe.html#multiple-survey-time-series"><i class="fa fa-check"></i><b>3.1.2</b> 2. Multiple survey time series</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="redus-master-recipe.html"><a href="redus-master-recipe.html#usage"><i class="fa fa-check"></i><b>3.2</b> Usage</a></li>
+<li class="chapter" data-level="3.3" data-path="redus-master-recipe.html"><a href="redus-master-recipe.html#parameter-details"><i class="fa fa-check"></i><b>3.3</b> Parameter details</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="redustools-standalone.html"><a href="redustools-standalone.html"><i class="fa fa-check"></i><b>4</b> REDUSTOOLS Standalone Example</a><ul>
+<li class="chapter" data-level="4.1" data-path="redustools-standalone.html"><a href="redustools-standalone.html#preparing-the-master-recipe"><i class="fa fa-check"></i><b>4.1</b> Preparing the master recipe</a></li>
+<li class="chapter" data-level="4.2" data-path="redustools-standalone.html"><a href="redustools-standalone.html#running-the-process"><i class="fa fa-check"></i><b>4.2</b> Running the process</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="redustools-standalone.html"><a href="redustools-standalone.html#setup"><i class="fa fa-check"></i><b>4.2.1</b> Setup</a></li>
+<li class="chapter" data-level="4.2.2" data-path="redustools-standalone.html"><a href="redustools-standalone.html#process"><i class="fa fa-check"></i><b>4.2.2</b> Process</a></li>
+<li class="chapter" data-level="4.2.3" data-path="redustools-standalone.html"><a href="redustools-standalone.html#examine-data"><i class="fa fa-check"></i><b>4.2.3</b> Examine data</a></li>
+<li class="chapter" data-level="4.2.4" data-path="redustools-standalone.html"><a href="redustools-standalone.html#optional-making-a-nice-single-page-visualization"><i class="fa fa-check"></i><b>4.2.4</b> (Optional) Making a nice single page visualization</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">REDUS Framework User Manuals</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="RF-script-guide" class="section level1">
+<h1><span class="header-section-number">2</span> REDUS Framework (R Script) User Manual</h1>
+<p>This manual will guide you to prepare an assessment to be run in the REDUS
+framework by using only R scripting methods.</p>
+<div id="pre-requisites-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Pre-requisites</h2>
+<p>To be able to follow this guide, you must have these components ready on your system:</p>
+<ol style="list-style-type: decimal">
+<li><p>A working Docker installation (<a href="https://www.docker.com/get-started" class="uri">https://www.docker.com/get-started</a>).</p></li>
+<li><p>An R application.</p></li>
+<li><p>R package <code>yaml</code>, <code>git2r</code>, <code>jsonlite</code> and <code>bibtex</code> installed.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="RF-script-guide.html#cb3-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;yaml&quot;</span>, <span class="st">&quot;git2r&quot;</span>, <span class="st">&quot;jsonlite&quot;</span>,<span class="st">&quot;bib2df&quot;</span>))</span></code></pre></div>
+<pre><code>## Installing packages into &#39;/home/runner/work/_temp/Library&#39;
+## (as &#39;lib&#39; is unspecified)</code></pre>
+<pre><code>## also installing the dependencies &#39;sys&#39;, &#39;fansi&#39;, &#39;pkgconfig&#39;, &#39;purrr&#39;, &#39;cli&#39;, &#39;crayon&#39;, &#39;utf8&#39;, &#39;askpass&#39;, &#39;ellipsis&#39;, &#39;generics&#39;, &#39;lifecycle&#39;, &#39;R6&#39;, &#39;tibble&#39;, &#39;tidyselect&#39;, &#39;vctrs&#39;, &#39;pillar&#39;, &#39;Rcpp&#39;, &#39;curl&#39;, &#39;mime&#39;, &#39;openssl&#39;, &#39;dplyr&#39;, &#39;humaniformat&#39;, &#39;httr&#39;</code></pre></li>
+</ol>
+</div>
+<div id="getting-the-redus-framework-container-template" class="section level2">
+<h2><span class="header-section-number">2.2</span> Getting the REDUS Framework container template</h2>
+<p>First, we need to download the REDUS Framework container template from Github.
+This template provides the skeleton that will automate the assessment processing.
+The template is available at <a href="https://github.com/REDUS-IMR/docker-redus-pipeline" class="uri">https://github.com/REDUS-IMR/docker-redus-pipeline</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="RF-script-guide.html#cb6-1"></a><span class="co"># (Optional) Set a working directory</span></span>
+<span id="cb6-2"><a href="RF-script-guide.html#cb6-2"></a><span class="kw">setwd</span>(<span class="kw">tempdir</span>())</span>
+<span id="cb6-3"><a href="RF-script-guide.html#cb6-3"></a></span>
+<span id="cb6-4"><a href="RF-script-guide.html#cb6-4"></a><span class="co"># Clone the template</span></span>
+<span id="cb6-5"><a href="RF-script-guide.html#cb6-5"></a>git2r<span class="op">::</span><span class="kw">clone</span>(<span class="st">&quot;https://github.com/REDUS-IMR/docker-redus-pipeline.git&quot;</span>, <span class="st">&quot;redus-framework&quot;</span>)</span></code></pre></div>
+<pre><code>## cloning into &#39;redus-framework&#39;...
+## Receiving objects:   2% (1/43),    8 kb
+## Receiving objects:  11% (5/43),    8 kb
+## Receiving objects:  23% (10/43),    8 kb
+## Receiving objects:  32% (14/43),    8 kb
+## Receiving objects:  41% (18/43),    8 kb
+## Receiving objects:  51% (22/43),    8 kb
+## Receiving objects:  62% (27/43),    8 kb
+## Receiving objects:  72% (31/43),    8 kb
+## Receiving objects:  81% (35/43),    8 kb
+## Receiving objects:  93% (40/43),    8 kb
+## Receiving objects: 100% (43/43),    8 kb, done.</code></pre>
+<pre><code>## Local:    master /tmp/RtmpojiQXs/redus-framework
+## Remote:   master @ origin (https://github.com/REDUS-IMR/docker-redus-pipeline.git)
+## Head:     [e99d35b] 2020-03-09: Put results in tmp to be picked by nginx path</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="RF-script-guide.html#cb9-1"></a><span class="co"># Go into redus-framework/projects as we will mostly work from this directory</span></span>
+<span id="cb9-2"><a href="RF-script-guide.html#cb9-2"></a><span class="kw">setwd</span>(<span class="st">&quot;redus-framework/projects&quot;</span>)</span></code></pre></div>
+</div>
+<div id="prepare-an-id" class="section level2">
+<h2><span class="header-section-number">2.3</span> Prepare an ID</h2>
+<p>Before preparing the assessment files,
+you must write a unique ID for the framework run in a file named <code>id.conf</code>
+in the <code>redus-framework/projects</code> directory.
+This ID is necessary for the several web services in the container to run.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="RF-script-guide.html#cb10-1"></a>ID &lt;-<span class="st"> &quot;0000&quot;</span></span>
+<span id="cb10-2"><a href="RF-script-guide.html#cb10-2"></a></span>
+<span id="cb10-3"><a href="RF-script-guide.html#cb10-3"></a>fileConn &lt;-<span class="st"> </span><span class="kw">file</span>(<span class="st">&quot;id.conf&quot;</span>)</span>
+<span id="cb10-4"><a href="RF-script-guide.html#cb10-4"></a><span class="kw">writeLines</span>(ID, fileConn)</span>
+<span id="cb10-5"><a href="RF-script-guide.html#cb10-5"></a><span class="kw">close</span>(fileConn)</span></code></pre></div>
+</div>
+<div id="get-the-assessment-bundle-code-and-data" class="section level2">
+<h2><span class="header-section-number">2.4</span> Get the assessment bundle (code and data)</h2>
+<p>REDUS Framework works best with any
+<a href="https://www.ices.dk/data/assessment-tools/Pages/transparent-assessment-framework.aspx">ICES TAF</a>
+-based assessment bundles. However, any assessment bundles from stockassessment.org will work
+too with some slight modifications.</p>
+<p>REDUS Framework Github repository provides two example assessments for users to tryout:</p>
+<ol style="list-style-type: decimal">
+<li>North East Artic Cod in 2018 (TAF based) [<a href="https://github.com/REDUS-IMR/redus-framework/raw/master/extra/neacod-2018.tgz">link</a>]</li>
+<li>Norwegian Sea Herring in 2019 (Stockassessment.org based) [<a href="https://github.com/REDUS-IMR/redus-framework/raw/master/extra/nsher-2019.tgz">link</a>]</li>
+</ol>
+<p>Read more about converting your own assessment into REDUS Framework in this guide (TODO).</p>
+<p>For this example let’s use the NEA Cod 2018 Assessment.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="RF-script-guide.html#cb11-1"></a><span class="co"># Download from Github</span></span>
+<span id="cb11-2"><a href="RF-script-guide.html#cb11-2"></a><span class="kw">download.file</span>(<span class="st">&quot;https://github.com/REDUS-IMR/redus-framework/raw/master/extra/neacod-2018.tgz&quot;</span>, <span class="st">&quot;neacod-2018.tgz&quot;</span>)</span>
+<span id="cb11-3"><a href="RF-script-guide.html#cb11-3"></a></span>
+<span id="cb11-4"><a href="RF-script-guide.html#cb11-4"></a><span class="co"># See the content of the file</span></span>
+<span id="cb11-5"><a href="RF-script-guide.html#cb11-5"></a><span class="kw">untar</span>(<span class="st">&quot;neacod-2018.tgz&quot;</span>, <span class="dt">list =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;neacod-2018/&quot;                                     
+##  [2] &quot;neacod-2018/data.R&quot;                               
+##  [3] &quot;neacod-2018/output.R&quot;                             
+##  [4] &quot;neacod-2018/model.R&quot;                              
+##  [5] &quot;neacod-2018/README.md&quot;                            
+##  [6] &quot;neacod-2018/report.R&quot;                             
+##  [7] &quot;neacod-2018/bootstrap/&quot;                           
+##  [8] &quot;neacod-2018/bootstrap/initial/&quot;                   
+##  [9] &quot;neacod-2018/bootstrap/initial/data/&quot;              
+## [10] &quot;neacod-2018/bootstrap/initial/data/nm.dat&quot;        
+## [11] &quot;neacod-2018/bootstrap/initial/data/cw.dat&quot;        
+## [12] &quot;neacod-2018/bootstrap/initial/data/cn.dat&quot;        
+## [13] &quot;neacod-2018/bootstrap/initial/data/mo.dat&quot;        
+## [14] &quot;neacod-2018/bootstrap/initial/data/nmOldAdj.dat&quot;  
+## [15] &quot;neacod-2018/bootstrap/initial/data/pcc.zip&quot;       
+## [16] &quot;neacod-2018/bootstrap/initial/data/pm.dat&quot;        
+## [17] &quot;neacod-2018/bootstrap/initial/data/pf.dat&quot;        
+## [18] &quot;neacod-2018/bootstrap/initial/data/survey.dat&quot;    
+## [19] &quot;neacod-2018/bootstrap/initial/data/lf.dat&quot;        
+## [20] &quot;neacod-2018/bootstrap/initial/data/lw.dat&quot;        
+## [21] &quot;neacod-2018/bootstrap/initial/data/survey_var.dat&quot;
+## [22] &quot;neacod-2018/bootstrap/initial/data/sw.dat&quot;        
+## [23] &quot;neacod-2018/bootstrap/initial/data/dw.dat&quot;        
+## [24] &quot;neacod-2018/bootstrap/initial/config/&quot;            
+## [25] &quot;neacod-2018/bootstrap/initial/config/model.cfg&quot;   
+## [26] &quot;neacod-2018/bootstrap/DATA.bib&quot;                   
+## [27] &quot;neacod-2018/bootstrap/SOFTWARE.bib&quot;               
+## [28] &quot;neacod-2018/utilities.R&quot;</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="RF-script-guide.html#cb13-1"></a><span class="co"># Unpack it</span></span>
+<span id="cb13-2"><a href="RF-script-guide.html#cb13-2"></a><span class="kw">untar</span>(<span class="st">&quot;neacod-2018.tgz&quot;</span>)</span>
+<span id="cb13-3"><a href="RF-script-guide.html#cb13-3"></a></span>
+<span id="cb13-4"><a href="RF-script-guide.html#cb13-4"></a><span class="co"># Remove the compressed file as we don&#39;t need it anymore</span></span>
+<span id="cb13-5"><a href="RF-script-guide.html#cb13-5"></a><span class="kw">unlink</span>(<span class="st">&quot;neacod-2018.tgz&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>NOTE: It’s possible to have more than one assessment bundle. Just extract the another
+more assesssment bundles in the current <code>redus-framework/projects</code> directory.</p>
+</blockquote>
+</div>
+<div id="configure-the-assessment" class="section level2">
+<h2><span class="header-section-number">2.5</span> Configure the assessment</h2>
+<div id="processing-directives" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Processing directives</h3>
+<p>All REDUS Framework configuration is stored in a configuration file <code>redus.yaml</code>.
+This file should be placed in the <code>redus/</code> directory of the assessment bundle.
+The configuration should start with these 3 lines:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb14-1"><a href="RF-script-guide.html#cb14-1"></a><span class="fu">default</span><span class="kw">:</span></span>
+<span id="cb14-2"><a href="RF-script-guide.html#cb14-2"></a><span class="at">  </span><span class="fu">redustools.remote</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;http://astarte.imr.no/ocpu/library/REDUStools/&quot;</span></span>
+<span id="cb14-3"><a href="RF-script-guide.html#cb14-3"></a><span class="at">  </span><span class="fu">survey</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;bootstrap/initial/data/survey.dat&quot;</span></span></code></pre></div>
+<p>The <code>redustools.remote</code> tells the framework the location of the REDUS Framework API
+Server endpoint. And <code>survey</code> tells the framework the survey data file that is used
+in the assessment. Let’s build this using R:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="RF-script-guide.html#cb15-1"></a><span class="co"># Create the default configuration</span></span>
+<span id="cb15-2"><a href="RF-script-guide.html#cb15-2"></a>configuration &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">default =</span> <span class="kw">list</span>(</span>
+<span id="cb15-3"><a href="RF-script-guide.html#cb15-3"></a>                        <span class="dt">redustools.remote=</span><span class="st">&quot;http://astarte.imr.no/ocpu/library/REDUStools/&quot;</span>,</span>
+<span id="cb15-4"><a href="RF-script-guide.html#cb15-4"></a>                        <span class="dt">survey =</span> <span class="st">&quot;bootstrap/initial/data/survey.dat&quot;</span>))</span>
+<span id="cb15-5"><a href="RF-script-guide.html#cb15-5"></a><span class="co"># Check the output</span></span>
+<span id="cb15-6"><a href="RF-script-guide.html#cb15-6"></a><span class="kw">cat</span>(yaml<span class="op">::</span><span class="kw">as.yaml</span>(configuration))</span></code></pre></div>
+<pre><code>## default:
+##   redustools.remote: http://astarte.imr.no/ocpu/library/REDUStools/
+##   survey: bootstrap/initial/data/survey.dat</code></pre>
+<div id="survey-data" class="section level4">
+<h4><span class="header-section-number">2.5.1.1</span> Survey data</h4>
+<p>To apply processing step to any survey indexes, we must examine the content
+of the survey file (e.g., <code>bootstrap/initial/data/survey.dat</code> and
+note down the fleet names (e.g., <code>NorBarTrSur</code>, <code>NorBarLofAcSur</code>, etc.).</p>
+<p>The processing mode can be either:</p>
+<ol style="list-style-type: decimal">
+<li><p><code>asis</code>: This means that you don’t want to modify the pre-defined data that comes with the assessment.</p></li>
+<li><p><code>remote</code>: Choose this to use the <em>official</em> result from the nightly StoX survey time series run.
+&gt; <strong>NOTE:</strong> The official results are currently available here: <a href="http://astarte.imr.no/ocpu/library/REDUStools/www/imrsts.html" class="uri">http://astarte.imr.no/ocpu/library/REDUStools/www/imrsts.html</a> . This was generated and served using the REDUStools R package available here: <a href="https://github.com/REDUS-IMR/REDUStools" class="uri">https://github.com/REDUS-IMR/REDUStools</a>.</p></li>
+<li><p><code>build</code>: This option will force the survey time series re-processing using StoX/Rstox. For this you will need to fill-in the recipe for the StoX processing. The recipe is an XML document as. See <a href="redus-master-recipe.html#redus-master-recipe">here</a> for more detailed information. Later you will need to save the recipe as an XML file (e.g., <code>NorBarTrSur.xml</code>). See below for an example.</p></li>
+<li><p><code>manual</code>: Here you can input manual values in the text format for the specified survey data.</p></li>
+</ol>
+<p>Below are some examples to apply an extra processing to the <code>NorBarTrSur</code> survey index data.</p>
+<p><strong>a. Re-Build the index using StoX (build mode)</strong></p>
+<p>We want to use StoX to re-process the <strong>“Barents Sea Northeast Arctic cod bottom trawl index in winter”</strong>
+survey time series from NMD, using the Recipe XML file available from here: <a href="https://git.imr.no/snippets/8" class="uri">https://git.imr.no/snippets/8</a>.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="RF-script-guide.html#cb17-1"></a><span class="co"># Create redus configuration directory</span></span>
+<span id="cb17-2"><a href="RF-script-guide.html#cb17-2"></a><span class="kw">dir.create</span>(<span class="st">&quot;neacod-2018/redus&quot;</span>)</span>
+<span id="cb17-3"><a href="RF-script-guide.html#cb17-3"></a></span>
+<span id="cb17-4"><a href="RF-script-guide.html#cb17-4"></a><span class="co"># Prepare XML recipe</span></span>
+<span id="cb17-5"><a href="RF-script-guide.html#cb17-5"></a><span class="kw">download.file</span>(<span class="st">&quot;https://git.imr.no/-/snippets/8/raw/master/snippetfile1.txt?inline=false&quot;</span>,</span>
+<span id="cb17-6"><a href="RF-script-guide.html#cb17-6"></a>    <span class="st">&quot;neacod-2018/redus/NorBarTrSur.xml&quot;</span>)</span>
+<span id="cb17-7"><a href="RF-script-guide.html#cb17-7"></a></span>
+<span id="cb17-8"><a href="RF-script-guide.html#cb17-8"></a><span class="co"># Prepare configuration (YAML)</span></span>
+<span id="cb17-9"><a href="RF-script-guide.html#cb17-9"></a></span>
+<span id="cb17-10"><a href="RF-script-guide.html#cb17-10"></a><span class="co">## Important prefix</span></span>
+<span id="cb17-11"><a href="RF-script-guide.html#cb17-11"></a>prefix &lt;-<span class="st"> &quot;survey.update.&quot;</span></span>
+<span id="cb17-12"><a href="RF-script-guide.html#cb17-12"></a></span>
+<span id="cb17-13"><a href="RF-script-guide.html#cb17-13"></a><span class="co">## The id of the survey configuration, (1 for the 1st, 2 for the 2nd, etc...)</span></span>
+<span id="cb17-14"><a href="RF-script-guide.html#cb17-14"></a>iter &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb17-15"><a href="RF-script-guide.html#cb17-15"></a></span>
+<span id="cb17-16"><a href="RF-script-guide.html#cb17-16"></a><span class="co">## The name of the target survey index</span></span>
+<span id="cb17-17"><a href="RF-script-guide.html#cb17-17"></a>survey &lt;-<span class="st"> &quot;NorBarTrSur&quot;</span></span>
+<span id="cb17-18"><a href="RF-script-guide.html#cb17-18"></a></span>
+<span id="cb17-19"><a href="RF-script-guide.html#cb17-19"></a><span class="co">## Process type (can be either &#39;asis&#39;, &#39;remote&#39;, &#39;build&#39; or &#39;manual&#39;)</span></span>
+<span id="cb17-20"><a href="RF-script-guide.html#cb17-20"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.mode&#39;</span>)]] &lt;-<span class="st"> &quot;build&quot;</span></span>
+<span id="cb17-21"><a href="RF-script-guide.html#cb17-21"></a></span>
+<span id="cb17-22"><a href="RF-script-guide.html#cb17-22"></a><span class="co">## REDUS Master recipe if mode is set to &quot;build&quot;</span></span>
+<span id="cb17-23"><a href="RF-script-guide.html#cb17-23"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.surveyBuildConf&#39;</span>)]] &lt;-<span class="st"> &quot;./redus/NorBarTrSur.xml&quot;</span></span>
+<span id="cb17-24"><a href="RF-script-guide.html#cb17-24"></a><span class="co">### Try to use Age information from the pre-defined data</span></span>
+<span id="cb17-25"><a href="RF-script-guide.html#cb17-25"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.useSourceAge&#39;</span>)]] &lt;-<span class="st"> &quot;true&quot;</span></span>
+<span id="cb17-26"><a href="RF-script-guide.html#cb17-26"></a><span class="co">### Try to use Year information from the pre-defined data</span></span>
+<span id="cb17-27"><a href="RF-script-guide.html#cb17-27"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.useSourceYear&#39;</span>)]] &lt;-<span class="st"> &quot;true&quot;</span></span>
+<span id="cb17-28"><a href="RF-script-guide.html#cb17-28"></a></span>
+<span id="cb17-29"><a href="RF-script-guide.html#cb17-29"></a><span class="co">## Name of the header target in survey.dat file</span></span>
+<span id="cb17-30"><a href="RF-script-guide.html#cb17-30"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.header&#39;</span>)]] &lt;-<span class="st"> </span>survey</span>
+<span id="cb17-31"><a href="RF-script-guide.html#cb17-31"></a></span>
+<span id="cb17-32"><a href="RF-script-guide.html#cb17-32"></a><span class="co">## Leave these two below as empty, these are the manual data input </span></span>
+<span id="cb17-33"><a href="RF-script-guide.html#cb17-33"></a><span class="co">## in text mode (each for index and covar)</span></span>
+<span id="cb17-34"><a href="RF-script-guide.html#cb17-34"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.data&#39;</span>)]] &lt;-<span class="st"> &quot;&quot;</span></span>
+<span id="cb17-35"><a href="RF-script-guide.html#cb17-35"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.data_var&#39;</span>)]] &lt;-<span class="st"> &quot;&quot;</span></span>
+<span id="cb17-36"><a href="RF-script-guide.html#cb17-36"></a></span>
+<span id="cb17-37"><a href="RF-script-guide.html#cb17-37"></a><span class="co">## We can leave below as empty as this is needed only for &quot;remote&quot; mode</span></span>
+<span id="cb17-38"><a href="RF-script-guide.html#cb17-38"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.stssource&#39;</span>)]] &lt;-<span class="st"> &quot;&quot;</span></span>
+<span id="cb17-39"><a href="RF-script-guide.html#cb17-39"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.stsdate&#39;</span>)]] &lt;-<span class="st"> &quot;&quot;</span></span></code></pre></div>
+<p><strong>b. Replace an index using the official result (remote mode)</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="RF-script-guide.html#cb18-1"></a><span class="co">## The id of the survey configuration (2 = second)</span></span>
+<span id="cb18-2"><a href="RF-script-guide.html#cb18-2"></a>iter &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb18-3"><a href="RF-script-guide.html#cb18-3"></a></span>
+<span id="cb18-4"><a href="RF-script-guide.html#cb18-4"></a><span class="co">## The name of the target survey index</span></span>
+<span id="cb18-5"><a href="RF-script-guide.html#cb18-5"></a>survey &lt;-<span class="st"> &quot;NorBarLofAcSur&quot;</span></span>
+<span id="cb18-6"><a href="RF-script-guide.html#cb18-6"></a></span>
+<span id="cb18-7"><a href="RF-script-guide.html#cb18-7"></a><span class="co">## Process type (can be either &#39;asis&#39;, &#39;remote&#39;, &#39;build&#39; or &#39;manual&#39;)</span></span>
+<span id="cb18-8"><a href="RF-script-guide.html#cb18-8"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.mode&#39;</span>)]] &lt;-<span class="st"> &quot;remote&quot;</span></span>
+<span id="cb18-9"><a href="RF-script-guide.html#cb18-9"></a></span>
+<span id="cb18-10"><a href="RF-script-guide.html#cb18-10"></a><span class="co">## These are the necessary directive for the &quot;remote&quot; mode</span></span>
+<span id="cb18-11"><a href="RF-script-guide.html#cb18-11"></a></span>
+<span id="cb18-12"><a href="RF-script-guide.html#cb18-12"></a><span class="co">### Survey time series name (from Dataset Explorer)</span></span>
+<span id="cb18-13"><a href="RF-script-guide.html#cb18-13"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.stssource&#39;</span>)]] &lt;-<span class="st"> &quot;Barents Sea Northeast Arctic cod bottom trawl index in winter&quot;</span></span>
+<span id="cb18-14"><a href="RF-script-guide.html#cb18-14"></a><span class="co">### Set a snapshot date if necessary</span></span>
+<span id="cb18-15"><a href="RF-script-guide.html#cb18-15"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.stsdate&#39;</span>)]] &lt;-<span class="st"> &quot;&quot;</span></span>
+<span id="cb18-16"><a href="RF-script-guide.html#cb18-16"></a><span class="co">### Try to use Age information from the pre-defined data</span></span>
+<span id="cb18-17"><a href="RF-script-guide.html#cb18-17"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.useSourceAge&#39;</span>)]] &lt;-<span class="st"> &quot;true&quot;</span></span>
+<span id="cb18-18"><a href="RF-script-guide.html#cb18-18"></a><span class="co">### Try to use Year information from the pre-defined data</span></span>
+<span id="cb18-19"><a href="RF-script-guide.html#cb18-19"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.useSourceYear&#39;</span>)]] &lt;-<span class="st"> &quot;false&quot;</span></span>
+<span id="cb18-20"><a href="RF-script-guide.html#cb18-20"></a></span>
+<span id="cb18-21"><a href="RF-script-guide.html#cb18-21"></a><span class="co">## Name of the header target in survey.dat file</span></span>
+<span id="cb18-22"><a href="RF-script-guide.html#cb18-22"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.header&#39;</span>)]] &lt;-<span class="st"> </span>survey</span>
+<span id="cb18-23"><a href="RF-script-guide.html#cb18-23"></a></span>
+<span id="cb18-24"><a href="RF-script-guide.html#cb18-24"></a><span class="co">## Below is not used in the &#39;remote&#39; mode</span></span>
+<span id="cb18-25"><a href="RF-script-guide.html#cb18-25"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.surveyBuildConf&#39;</span>)]] &lt;-<span class="st"> &quot;&quot;</span></span>
+<span id="cb18-26"><a href="RF-script-guide.html#cb18-26"></a></span>
+<span id="cb18-27"><a href="RF-script-guide.html#cb18-27"></a><span class="co">## Leave these two below as empty, these are the manual data input </span></span>
+<span id="cb18-28"><a href="RF-script-guide.html#cb18-28"></a><span class="co">## in text mode (each for index and covar)</span></span>
+<span id="cb18-29"><a href="RF-script-guide.html#cb18-29"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.data&#39;</span>)]] &lt;-<span class="st"> &quot;&quot;</span></span>
+<span id="cb18-30"><a href="RF-script-guide.html#cb18-30"></a>configuration[[<span class="st">&quot;default&quot;</span>]][[<span class="kw">paste0</span>(prefix, iter, <span class="st">&#39;.data_var&#39;</span>)]] &lt;-<span class="st"> &quot;&quot;</span></span></code></pre></div>
+<p><strong>Write the configuration</strong></p>
+<p>You must write the configuration back to the assessment bundle.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="RF-script-guide.html#cb19-1"></a><span class="co">## Write configuration to the root of the assessment directory</span></span>
+<span id="cb19-2"><a href="RF-script-guide.html#cb19-2"></a>yaml<span class="op">::</span><span class="kw">write_yaml</span>(configuration, <span class="st">&quot;neacod-2018/redus/redus.yaml&quot;</span>)</span></code></pre></div>
+</div>
+<div id="assessment-program" class="section level4">
+<h4><span class="header-section-number">2.5.1.2</span> Assessment program</h4>
+<p>To change the assessment program, you need to open the <code>bootstrap/SOFTWARE.bib</code>
+file and change the <code>source</code> value in the <code>stockassessment</code> item:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="RF-script-guide.html#cb20-1"></a><span class="co"># Read Software BIB</span></span>
+<span id="cb20-2"><a href="RF-script-guide.html#cb20-2"></a>df &lt;-<span class="st"> </span>bib2df<span class="op">::</span><span class="kw">bib2df</span>(<span class="st">&quot;neacod-2018/bootstrap/SOFTWARE.bib&quot;</span>)</span>
+<span id="cb20-3"><a href="RF-script-guide.html#cb20-3"></a></span>
+<span id="cb20-4"><a href="RF-script-guide.html#cb20-4"></a><span class="co"># Peek the pre-defined program</span></span>
+<span id="cb20-5"><a href="RF-script-guide.html#cb20-5"></a><span class="kw">print</span>(df[<span class="dv">1</span>, <span class="st">&quot;SOURCE&quot;</span>])</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##   SOURCE                                  
+##   &lt;chr&gt;                                   
+## 1 fishfollower/SAM/stockassessment@a295ef2</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="RF-script-guide.html#cb22-1"></a><span class="co"># Change assessment program to the latest SAM</span></span>
+<span id="cb22-2"><a href="RF-script-guide.html#cb22-2"></a>df[<span class="dv">1</span>, <span class="st">&quot;SOURCE&quot;</span>] &lt;-<span class="st">  &quot;fishfollower/SAM/stockassessment@master&quot;</span></span>
+<span id="cb22-3"><a href="RF-script-guide.html#cb22-3"></a></span>
+<span id="cb22-4"><a href="RF-script-guide.html#cb22-4"></a><span class="co"># Write back the change</span></span>
+<span id="cb22-5"><a href="RF-script-guide.html#cb22-5"></a>bib2df<span class="op">::</span><span class="kw">df2bib</span>(df, <span class="st">&quot;neacod-2018/bootstrap/SOFTWARE.bib&quot;</span>)</span></code></pre></div>
+<p>In addition to the above, if you are either using SAM or XSAM, it is necessary
+to write <code>use.SAM</code> or <code>use.XSAM</code> in the REDUS configuration directory:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="RF-script-guide.html#cb23-1"></a><span class="co"># Notify that we will use XSAM</span></span>
+<span id="cb23-2"><a href="RF-script-guide.html#cb23-2"></a>fileConn &lt;-<span class="st"> </span><span class="kw">file</span>(<span class="st">&quot;neacod-2018/redus/use.XSAM&quot;</span>)</span>
+<span id="cb23-3"><a href="RF-script-guide.html#cb23-3"></a></span>
+<span id="cb23-4"><a href="RF-script-guide.html#cb23-4"></a><span class="co"># or SAM</span></span>
+<span id="cb23-5"><a href="RF-script-guide.html#cb23-5"></a><span class="co">#fileConn &lt;- file(&quot;neacod-2018/redus/use.SAM&quot;)</span></span>
+<span id="cb23-6"><a href="RF-script-guide.html#cb23-6"></a></span>
+<span id="cb23-7"><a href="RF-script-guide.html#cb23-7"></a><span class="kw">writeLines</span>(<span class="st">&quot;&quot;</span>, fileConn)</span>
+<span id="cb23-8"><a href="RF-script-guide.html#cb23-8"></a><span class="kw">close</span>(fileConn)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="build-and-run-the-redus-framework-container" class="section level2">
+<h2><span class="header-section-number">2.6</span> Build and run the REDUS Framework container</h2>
+<p>These are the final step needed to run the assessment.
+After all the files are ready we can proceed with building
+the Docker image and run the framework as a Docker container.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="RF-script-guide.html#cb24-1"></a><span class="co"># Get back to &#39;redus-framework&#39; directory</span></span>
+<span id="cb24-2"><a href="RF-script-guide.html#cb24-2"></a><span class="kw">setwd</span>(<span class="st">&quot;..&quot;</span>)</span>
+<span id="cb24-3"><a href="RF-script-guide.html#cb24-3"></a></span>
+<span id="cb24-4"><a href="RF-script-guide.html#cb24-4"></a><span class="co"># Select a name for the run </span></span>
+<span id="cb24-5"><a href="RF-script-guide.html#cb24-5"></a>runname &lt;-<span class="st"> &quot;testit&quot;</span></span>
+<span id="cb24-6"><a href="RF-script-guide.html#cb24-6"></a></span>
+<span id="cb24-7"><a href="RF-script-guide.html#cb24-7"></a><span class="co"># Select port for the web services </span></span>
+<span id="cb24-8"><a href="RF-script-guide.html#cb24-8"></a>port &lt;-<span class="st"> </span><span class="dv">8000</span></span>
+<span id="cb24-9"><a href="RF-script-guide.html#cb24-9"></a></span>
+<span id="cb24-10"><a href="RF-script-guide.html#cb24-10"></a><span class="co"># Build the image</span></span>
+<span id="cb24-11"><a href="RF-script-guide.html#cb24-11"></a><span class="kw">Sys.setenv</span>(<span class="dt">RUN =</span> runname, <span class="dt">PORT =</span> port)</span>
+<span id="cb24-12"><a href="RF-script-guide.html#cb24-12"></a></span>
+<span id="cb24-13"><a href="RF-script-guide.html#cb24-13"></a><span class="kw">system</span>(<span class="st">&quot;docker build --pull --rm -t ${RUN} .&quot;</span>)</span>
+<span id="cb24-14"><a href="RF-script-guide.html#cb24-14"></a></span>
+<span id="cb24-15"><a href="RF-script-guide.html#cb24-15"></a><span class="co"># Run the image</span></span>
+<span id="cb24-16"><a href="RF-script-guide.html#cb24-16"></a><span class="kw">system</span>(<span class="st">&quot;docker run -p ${PORT}:8888 --name ${RUN} -dit ${RUN}&quot;</span>)</span></code></pre></div>
+</div>
+<div id="examine-the-run" class="section level2">
+<h2><span class="header-section-number">2.7</span> Examine the run</h2>
+<p>As with the cloud version of the REDUS Framework, the run
+from the script provides the various Web-based tools, namely:
+1. File explorer
+2. Terminal
+3. Logs
+4. Results page</p>
+<p>You can instruct R to open the above URLs using your web browser:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="RF-script-guide.html#cb25-1"></a><span class="co"># Let&#39;s open the File Explorer</span></span>
+<span id="cb25-2"><a href="RF-script-guide.html#cb25-2"></a><span class="kw">browseURL</span>(<span class="kw">paste0</span>(<span class="st">&quot;http://localhost:&quot;</span>, port, <span class="st">&quot;/id/&quot;</span>, ID, <span class="st">&quot;/p/workspace/&quot;</span>))</span>
+<span id="cb25-3"><a href="RF-script-guide.html#cb25-3"></a></span>
+<span id="cb25-4"><a href="RF-script-guide.html#cb25-4"></a><span class="co"># Let&#39;s open the Terminal</span></span>
+<span id="cb25-5"><a href="RF-script-guide.html#cb25-5"></a><span class="kw">browseURL</span>(<span class="kw">paste0</span>(<span class="st">&quot;http://localhost:&quot;</span>, port, <span class="st">&quot;/id/&quot;</span>, ID, <span class="st">&quot;/p/terminal&quot;</span>))</span>
+<span id="cb25-6"><a href="RF-script-guide.html#cb25-6"></a></span>
+<span id="cb25-7"><a href="RF-script-guide.html#cb25-7"></a><span class="co"># Let&#39;s open the Logs</span></span>
+<span id="cb25-8"><a href="RF-script-guide.html#cb25-8"></a><span class="kw">browseURL</span>(<span class="kw">paste0</span>(<span class="st">&quot;http://localhost:&quot;</span>, port, <span class="st">&quot;/id/&quot;</span>, ID, <span class="st">&quot;/p/logs&quot;</span>))</span>
+<span id="cb25-9"><a href="RF-script-guide.html#cb25-9"></a></span>
+<span id="cb25-10"><a href="RF-script-guide.html#cb25-10"></a><span class="co"># Let&#39;s open the Results page (only available when run is finish with success)</span></span>
+<span id="cb25-11"><a href="RF-script-guide.html#cb25-11"></a><span class="kw">browseURL</span>(<span class="kw">paste0</span>(<span class="st">&quot;http://localhost:&quot;</span>, port, <span class="st">&quot;/id/&quot;</span>, ID, <span class="st">&quot;/p/report&quot;</span>))</span></code></pre></div>
+</div>
+<div id="stopping-the-run" class="section level2">
+<h2><span class="header-section-number">2.8</span> Stopping the run</h2>
+<p>Remember to stop the Docker container after you finished to ensure all the
+memory and disk space used are released:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="RF-script-guide.html#cb26-1"></a><span class="co"># Kill the run</span></span>
+<span id="cb26-2"><a href="RF-script-guide.html#cb26-2"></a><span class="kw">system</span>(<span class="st">&quot;docker kill ${RUN}&quot;</span>)</span>
+<span id="cb26-3"><a href="RF-script-guide.html#cb26-3"></a></span>
+<span id="cb26-4"><a href="RF-script-guide.html#cb26-4"></a><span class="co"># Cleaning up</span></span>
+<span id="cb26-5"><a href="RF-script-guide.html#cb26-5"></a><span class="kw">system</span>(<span class="st">&quot;docker rm ${RUN}&quot;</span>)</span></code></pre></div>
+</div>
+<div id="advanced-parsing-the-status-of-the-run" class="section level2">
+<h2><span class="header-section-number">2.9</span> (Advanced) Parsing the status of the run</h2>
+<p>For the brave soul who likes to tinker more with the program, you can utilize
+the status information to programmatically get the results and/or cleaning
+up the run.</p>
+<p>You can use a more advanced scheduler such as <code>taskscheduleR</code> package to automate
+everything.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="RF-script-guide.html#cb27-1"></a><span class="co"># Try to print the status</span></span>
+<span id="cb27-2"><a href="RF-script-guide.html#cb27-2"></a>status &lt;-<span class="st"> </span>jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">paste0</span>(<span class="st">&quot;http://localhost:&quot;</span>, port, <span class="st">&quot;/id/&quot;</span>, ID, <span class="st">&quot;/p/status&quot;</span>))</span>
+<span id="cb27-3"><a href="RF-script-guide.html#cb27-3"></a><span class="kw">print</span>(status)</span>
+<span id="cb27-4"><a href="RF-script-guide.html#cb27-4"></a></span>
+<span id="cb27-5"><a href="RF-script-guide.html#cb27-5"></a><span class="co"># Show me the results ONLY when the run has successfully finished</span></span>
+<span id="cb27-6"><a href="RF-script-guide.html#cb27-6"></a>status &lt;-<span class="st"> </span>jsonlite<span class="op">::</span><span class="kw">fromJSON</span>(<span class="kw">paste0</span>(<span class="st">&quot;http://localhost:&quot;</span>, port, <span class="st">&quot;/id/&quot;</span>, ID, <span class="st">&quot;/p/status&quot;</span>))</span>
+<span id="cb27-7"><a href="RF-script-guide.html#cb27-7"></a></span>
+<span id="cb27-8"><a href="RF-script-guide.html#cb27-8"></a><span class="co"># All statuses are 0 means that the pre-processing and the assessment runs</span></span>
+<span id="cb27-9"><a href="RF-script-guide.html#cb27-9"></a><span class="co"># have been finished without errors.</span></span>
+<span id="cb27-10"><a href="RF-script-guide.html#cb27-10"></a><span class="cf">if</span>(<span class="kw">sum</span>(status<span class="op">$</span>redus) <span class="op">+</span><span class="st"> </span><span class="kw">sum</span>(status<span class="op">$</span>assessement) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb27-11"><a href="RF-script-guide.html#cb27-11"></a>    <span class="kw">browseURL</span>(<span class="kw">paste0</span>(<span class="st">&quot;http://localhost:&quot;</span>, port, <span class="st">&quot;/id/&quot;</span>, ID, <span class="st">&quot;/p/report&quot;</span>))</span>
+<span id="cb27-12"><a href="RF-script-guide.html#cb27-12"></a>}</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="RF-cloud-guide.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="redus-master-recipe.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
